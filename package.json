@@ -4,7 +4,7 @@
   "description": "Odin Project assignment ",
   "main": "index.js",
   "scripts": {
-    "watch": "wabpack --watch",
+    "watch": "webpack --watch",
     "build": "webpack"
   },
   "author": "Munkhtemuulen Khashbolor",
@@ -21,6 +21,7 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "normalize.css": "^8.0.1"
   }
 }
