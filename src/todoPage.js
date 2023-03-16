@@ -2,6 +2,8 @@ import "normalize.css";
 import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
+import createTodo from "./todo-creater";
+
 
 export default function todoPage(pageName) {
   const todoContainer = document.querySelector(".todo-container");
@@ -30,4 +32,8 @@ export default function todoPage(pageName) {
   numberOfItem.textContent = "0";
 
   name.append(listName, numberOfItem);
+
+  addTodoBtn.addEventListener("click", () => {
+    createTodo()
+  })
 }

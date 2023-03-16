@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: SF Pro;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 @font-face {
     font-family: SF Pro;
@@ -89,6 +89,7 @@ body {
     color: rgb(73, 73, 73);
     font-family: SF Pro bold;
     font-size: 28px;
+    
 }
 .default-list > button > div:nth-child(1) {
     display: flex;
@@ -129,12 +130,22 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    position:relative;
+    overflow: auto;
 }
 .list > div:nth-child(1) {
     height: 20px;
     margin-left: 10px;
     font-family: SF Pro bold;
     color: rgb(168, 168, 168);
+}
+#list-add-div {
+    position: sticky;
+    bottom: 0px;
+    background-color: rgb(236, 236, 236);
+    min-height: 35px;
+    display: flex;
+    align-items: center;
 }
 .list-add {
     all: unset;
@@ -161,6 +172,44 @@ body {
     flex-direction: column;
     padding-top: 10px;
 }
+/* list input */
+.list-names > div > .input-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 200px;
+    
+}
+.input-container > input {
+    background-color: rgb(189, 189, 189);
+    border-radius: 5px;
+    padding: 3px;
+    border: none;
+    width: 80%;
+}
+.input-container > input:focus {
+    outline: 2px solid rgb(97, 97, 97);
+
+}
+.input-container button {
+    all: unset;
+    margin-right: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 12.5px;
+}
+.input-container button span{
+    font-size: 20px;
+}
+.input-container button:hover {
+    background-color: rgb(189, 189, 189);   
+}
+
+/* list after confirmed */
 .list-names > div {
     display: flex;
     min-height: 45px;
@@ -180,9 +229,12 @@ body {
 .list-names > div .list-logo + div{
     margin-right: auto;
     font-size: 17px;
+    max-width: 150px;
+    overflow: hidden;
 }
 .number-of-item {
     margin-right: 10px;
+    margin-left: 5px;
     font-family: SF Pro bold;
     font-size: 20px;
     color: rgb(133, 133, 133);;
@@ -196,17 +248,35 @@ body {
 .list-names > div:hover {
     background-color: rgb(218, 218, 218);
 }
+.list-names > div > button {
+    all: unset;
+    margin-right: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 15px;
+}
+.list-names > div > button > span {
+    font-size: 22px;
+}
+.list-names > div > button:hover {
+    background-color: rgba(189, 189, 189);  
+}
 
 /* ToDo List */
 
 .todo-container {
     padding: 15px 30px 15px 30px;
     display: grid;
-    grid-template-rows: 40px 80px 1fr;
+    grid-template-rows: 35px 120px 1fr;
 }
 .add-btn {
     all: unset;
-    width: 40px;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 17.5px;
     justify-self: end;
     cursor: pointer;
     color: rgb(100, 100, 100);
@@ -217,16 +287,22 @@ body {
 .add-btn span {
     font-size: 30px;
 }
+.add-btn:hover {
+    background-color:  rgb(197, 197, 197);;
+}
 .todo-container > div:nth-child(2) {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 .todo-list-name {
+    position: relative;
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
     color: rgb(100, 100, 100);
     font-size: 45px;
+    overflow-wrap: anywhere;
+    hyphens: auto;
 }
 .todo-number-of-item {
     color: rgb(100, 100, 100);
@@ -234,12 +310,56 @@ body {
     font-family: 'Nunito', sans-serif;
     margin-right: 5px;
     font-weight: 600;
+    margin-left: 20px;
 }
 .todo-list{
-    border: 3px solid green;
+    /* border: 3px solid green; */
     display: flex;
     flex-direction: column;
 }
+
+/* todos */
 .todo-list > div {
-    height: 50px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.todo-list > div:hover {
+    background-color: rgb(218, 218, 218);
+}
+/* todo input */
+.todo-list > div > input {
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 85%;
+    margin-left: 20px;
+    margin-right: auto;
+    padding: 2px;
+    font-family: 'Nunito', sans-serif;
+    color: black;
+    font-weight: 600;
+    background-color: transparent;
+}
+.todo-list > div > input:focus {
+    outline: none;
+}
+.todo-list > div .todo-cancel {
+    all: unset;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 15px;
+}
+.todo-list > div .todo-cancel:hover{
+    background-color: rgba(189, 189, 189); 
+}
+/* todo after confirmed */
+.note {
+    flex-grow: 1;
+    overflow-wrap: anywhere;
 }
