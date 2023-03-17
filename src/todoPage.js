@@ -35,5 +35,6 @@ export default function todoPage(pageName) {
 
   addTodoBtn.addEventListener("click", () => {
     createTodo()
+    addTodoBtn.disabled = true;
   })
 }

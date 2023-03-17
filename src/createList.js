@@ -3,12 +3,12 @@ import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
 import todoPage from "./todoPage";
+import todoLoop from "./todoLoop";
 
 const content = document.querySelector(".todo-container");
 
 function cleaner() {
   while (content.firstChild) {
-    content.removeAttribute("id", "warning");
     content.removeChild(content.lastChild);
   }
 }
@@ -73,9 +73,13 @@ export function confirm(input) {
 
     sameNameChecker(input);
 
-    div.addEventListener("click", () => {
-      cleaner();
-      todoPage(input.value);
+    div.addEventListener("click", (e) => {
+      // if prevents from double clicking on div when you are clicking deleteBtn
+      if (!(e.target.classList.value === "material-symbols-outlined")) {
+        cleaner();
+        todoPage(input.value);
+        todoLoop(input.value)
+      }
     });
 
     deleteBtn.addEventListener("click", (e) => {
@@ -111,17 +115,21 @@ export default function listInput() {
   const input = document.createElement("input");
   const cancelBtn = document.createElement("button");
 
-  input.setAttribute("placeholder", "List Name")
+  input.setAttribute("placeholder", "List Name");
   cancelBtn.classList.add("cancel");
   cancelBtn.innerHTML += '<span class="material-symbols-outlined">close</span>';
 
   inputContainer.append(input, cancelBtn);
-  
+
   input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       cleaner();
       sameNameChecker(input);
       confirm(input);
+
+      const addListBtn = document.querySelector(".list-add");
+      addListBtn.disabled = false;
+
       // eslint-disable-next-line no-restricted-globals
       event.preventDefault();
     }
@@ -130,6 +138,6 @@ export default function listInput() {
   cancelBtn.addEventListener("click", () => {
     // eslint-disable-next-line no-restricted-globals
     event.preventDefault();
-    list.removeChild(list.lastChild); 
+    list.removeChild(list.lastChild);
   });
 }

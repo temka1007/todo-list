@@ -9,7 +9,6 @@ const content = document.querySelector(".todo-container");
 
 function cleaner() {
   while (content.firstChild) {
-    content.removeAttribute("id", "warning");
     content.removeChild(content.lastChild);
   }
 }
@@ -69,19 +68,24 @@ function confirm(input) {
 
   sameNameChecker(input);
 
-  div.addEventListener("click", () => {
-    cleaner();
-    todoPage(input);
-    todoLoop(input);
-  });
+  div.addEventListener("click", (e) => {
+     // if prevents from double clicking on div when you are clicking deleteBtn
+    if(!(e.target.classList.value === "material-symbols-outlined")){
+      console.log("yes")
+      cleaner()
+      todoPage(input);
+      todoLoop(input);
+    }
+  }); 
 
   deleteBtn.addEventListener("click", (e) => {
+    cleaner();
     const element = e.target.parentElement.parentElement;
     list.removeChild(element);
     localStorage.removeItem(input);
-    cleaner();
   });
-}
+  
+} 
 
 export default function checkingExistingList() {
   for (let i = 0; i < localStorage.length; i += 1) {
