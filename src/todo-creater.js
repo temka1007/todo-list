@@ -17,7 +17,6 @@ class TodoItem {
     this.flagged = false;
     this.completed = false;
     this.scheduled = date;
-    this.isScheduled = false;
     this.id = Math.floor(100000 + Math.random() * 900000);
   }
 }
@@ -84,6 +83,23 @@ function confirm(input, date) {
     }
   });
 
+  check.addEventListener("click", () => {
+    const latestArray = JSON.parse(localStorage.getItem(listName));
+    for (let i = 0; i < latestArray.length; i += 1) {
+      if (latestArray[i].id === id) {
+        latestArray[i].completed = !latestArray[i].completed;
+        localStorage.setItem(listName, JSON.stringify(latestArray));
+        const checked = document.createElement("div");
+        if (latestArray[i].completed) {
+          console.log("true");
+          check.appendChild(checked);
+        } else {
+          check.removeChild(check.firstChild);
+        }
+      }
+    }
+  });
+
   deleteBtn.addEventListener("click", () => {
     for (let i = 0; i < array.length; i += 1) {
       if (array[i].id === id) {
@@ -143,6 +159,8 @@ export default function createTodo() {
 
       const addTodoBtn = document.querySelector('.add-btn');
       addTodoBtn.disabled = false;
+
+      
 
       // eslint-disable-next-line no-restricted-globals
       event.preventDefault();

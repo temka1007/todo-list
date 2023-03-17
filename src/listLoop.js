@@ -71,7 +71,6 @@ function confirm(input) {
   div.addEventListener("click", (e) => {
      // if prevents from double clicking on div when you are clicking deleteBtn
     if(!(e.target.classList.value === "material-symbols-outlined")){
-      console.log("yes")
       cleaner()
       todoPage(input);
       todoLoop(input);
@@ -89,8 +88,7 @@ function confirm(input) {
 
 export default function checkingExistingList() {
   for (let i = 0; i < localStorage.length; i += 1) {
-    const array = localStorage.key(i);
-    console.log(array);
+    const array = localStorage.key(i);  
     confirm(array);
   }
 }
