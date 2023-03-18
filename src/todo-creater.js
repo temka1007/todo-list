@@ -99,17 +99,22 @@ function confirm(input, date) {
   });
 
   deleteBtn.addEventListener("click", () => {
-    // can't figure this out
-    for (let i = 0; i < array.length; i += 1) {
-      if (array[i].id === id) {
-        todoList.removeChild(div);
-        const latestArray = JSON.parse(localStorage.getItem(listName));
-        const newArray = latestArray.filter((object) => object.id !== id);
-        localStorage.setItem(listName, JSON.stringify(newArray));
-        todoIndex(listName)
-      }
-    } 
+    deleteFunction(listName, id, div)
   });
+}
+
+function deleteFunction(listName, id, div) {
+  const array = JSON.parse(localStorage.getItem(listName))
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].id === id) {
+      const todoList = document.querySelector(".todo-list");
+      todoList.removeChild(div)
+      const latestArray = JSON.parse(localStorage.getItem(listName));
+      const newArray = latestArray.filter((object) => object.id !== id);
+      localStorage.setItem(listName, JSON.stringify(newArray));
+      todoIndex(listName)
+    }
+  }
 }
 
 export default function createTodo() {
