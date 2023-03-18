@@ -37,6 +37,14 @@ body {
     min-height: 500px;
     background-color: white;
 }
+#warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 0, 0, 0.918);
+    font-family: SF Pro bold;
+    font-size: 30px;
+}
 
 /* List */
 #content .list-container {

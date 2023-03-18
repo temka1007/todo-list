@@ -15,7 +15,6 @@ export default function todayPage() {
   addTodoBtn.classList.add("add-btn");
   todoList.classList.add("todo-list");
 
-
   todoContainer.append(addTodoBtn, name, todoList);
 
   // name > div*2
@@ -25,24 +24,31 @@ export default function todayPage() {
   listName.classList.add("todo-list-name");
   numberOfItem.classList.add("todo-number-of-item");
 
-  listName.textContent = "Completed";
+  listName.textContent = "Today";
   let today = new Date();
   today = today.toISOString().slice(0, 10);
-  console.log(today)
 
-  
   for (let i = 0; i < localStorage.length; i += 1) {
     const listNameAll = localStorage.key(i);
-    const array = JSON.parse(localStorage.getItem(listNameAll))
+    const array = JSON.parse(localStorage.getItem(listNameAll));
     for (let x = 0; x < array.length; x += 1) {
-        if(array[x].scheduled === today) {
-            console.log("yes")
-            confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
-        }
+      if (array[x].scheduled === today) {
+        confirm(
+          array[x].note,
+          array[x].scheduled,
+          array,
+          array[x].id,
+          listNameAll,
+          x,
+          "yes"
+        );
+      }
     }
-  } 
+  }
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
-  
+  numberOfItem.style.color = "rgb(61, 122, 255)";
+  listName.style.color = "rgb(61, 122, 255)";
+
   name.append(listName, numberOfItem);
 }

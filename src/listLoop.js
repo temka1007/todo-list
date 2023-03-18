@@ -4,11 +4,13 @@ import "./style.css";
 import "date-fns";
 import todoPage from "./todoPage";
 import todoLoop from "./todoLoop";
+import defaultListIndexLoop from "./defaultListIndex";
 
 const content = document.querySelector(".todo-container");
 
 function cleaner() {
   while (content.firstChild) {
+    content.removeAttribute("id")
     content.removeChild(content.lastChild);
   }
 }
@@ -56,6 +58,7 @@ function confirm(input) {
   const deleteBtn = document.createElement("button");
 
   numberOfItem.classList.add("number-of-item");
+  numberOfItem.setAttribute("id", `${input}`)
 
   listName.textContent = input;
 
@@ -82,6 +85,7 @@ function confirm(input) {
     const element = e.target.parentElement.parentElement;
     list.removeChild(element);
     localStorage.removeItem(input);
+    defaultListIndexLoop()
   });
   
 } 

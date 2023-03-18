@@ -11,15 +11,16 @@ import completedPage from "./completed";
 import assignedPage from "./assigned";
 import scheduledPage from "./scheduled";
 import todayPage from "./today";
+import defaultListIndexLoop from "./defaultListIndex";
 
 const content = document.querySelector(".todo-container");
 const addListBtn = document.querySelector(".list-add");
-const today = document.querySelector('.today');
-const scheduled = document.querySelector('.scheduled');
-const all = document.querySelector('.all');
-const flagged = document.querySelector('.flagged');
-const completed = document.querySelector('.completed'); 
-const assigned = document.querySelector('.assigned');
+const today = document.querySelector(".today");
+const scheduled = document.querySelector(".scheduled");
+const all = document.querySelector(".all");
+const flagged = document.querySelector(".flagged");
+const completed = document.querySelector(".completed");
+const assigned = document.querySelector(".assigned");
 
 function cleaner() {
   while (content.firstChild) {
@@ -33,33 +34,34 @@ addListBtn.addEventListener("click", () => {
 });
 
 today.addEventListener("click", () => {
-  cleaner()
-  todayPage()
-})
+  cleaner();
+  todayPage();
+});
 
 scheduled.addEventListener("click", () => {
-  cleaner()
-  scheduledPage()
-})
+  cleaner();
+  scheduledPage();
+});
 
 all.addEventListener("click", () => {
-  cleaner()
-  allPage()
-})
+  cleaner();
+  allPage();
+});
 
 flagged.addEventListener("click", () => {
-  cleaner()
-  flaggedPage()
-})
+  cleaner();
+  flaggedPage();
+});
 
 completed.addEventListener("click", () => {
-  cleaner()
-  completedPage()
-})
+  cleaner();
+  completedPage();
+});
 
 assigned.addEventListener("click", () => {
-  cleaner()
-  assignedPage()
-})
+  cleaner();
+  assignedPage();
+});
 
 checkingExistingList();
+defaultListIndexLoop();

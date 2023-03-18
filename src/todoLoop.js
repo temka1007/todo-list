@@ -3,9 +3,9 @@ import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
 import todoIndex from "./todoIndex";
+import defaultListIndexLoop from "./defaultListIndex";
 
 export function confirm(input, date, array, todoID, listName, i, isDefault) {
-
   // todo-list > div
   const todoList = document.querySelector(".todo-list");
   const div = document.createElement("div");
@@ -29,13 +29,13 @@ export function confirm(input, date, array, todoID, listName, i, isDefault) {
         localStorage.setItem(listName, JSON.stringify(latestArray));
         const checked = document.createElement("div");
         if (latestArray[i].completed) {
-          console.log("true");
           check.appendChild(checked);
         } else {
           check.removeChild(check.firstChild);
         }
       }
     }
+    defaultListIndexLoop();
   });
 
   // note-container > div button*4
@@ -59,8 +59,7 @@ export function confirm(input, date, array, todoID, listName, i, isDefault) {
 
   const latestArray = JSON.parse(localStorage.getItem(listName));
 
-  todoIndex(listName, isDefault)
-  console.log(isDefault)
+  todoIndex(listName, isDefault);
 
   flagBtn.style.backgroundColor = latestArray[i].flagged
     ? "rgb(253, 149, 30)"
@@ -69,7 +68,6 @@ export function confirm(input, date, array, todoID, listName, i, isDefault) {
 
   const checked = document.createElement("div");
   if (latestArray[i].completed) {
-    console.log("true");
     check.appendChild(checked);
   } else if (!latestArray[i].completed) {
     if (check.hasChildNodes.length) {
@@ -90,6 +88,7 @@ export function confirm(input, date, array, todoID, listName, i, isDefault) {
         // Change the background color of the flag button based on the updated flagged property
       }
     }
+    defaultListIndexLoop();
   });
 
   deleteBtn.addEventListener("click", () => {
@@ -99,12 +98,11 @@ export function confirm(input, date, array, todoID, listName, i, isDefault) {
         const latestArray = JSON.parse(localStorage.getItem(listName));
         const newArray = latestArray.filter((object) => object.id !== todoID);
         localStorage.setItem(listName, JSON.stringify(newArray));
-        todoIndex(listName, isDefault)
+        todoIndex(listName, isDefault);
       }
     }
+    defaultListIndexLoop();
   });
-
-  
 }
 
 export default function todoLoop(listName) {

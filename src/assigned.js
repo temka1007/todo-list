@@ -14,7 +14,6 @@ export default function assignedPage() {
   addTodoBtn.classList.add("add-btn");
   todoList.classList.add("todo-list");
 
-
   todoContainer.append(addTodoBtn, name, todoList);
 
   // name > div*2
@@ -27,6 +26,9 @@ export default function assignedPage() {
   listName.textContent = "Assigned";
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
-  
+
+  numberOfItem.style.color = "rgb(16, 177, 16)";
+  listName.style.color = "rgb(16, 177, 16)";
+
   name.append(listName, numberOfItem);
 }

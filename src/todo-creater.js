@@ -3,15 +3,7 @@ import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
 import todoIndex from "./todoIndex";
-
-// function cleaner() {
-//   while (content.firstChild) {
-//     content.removeAttribute("id", "warning");
-//     content.removeChild(content.lastChild);
-//   }
-// }
-
-
+import defaultListIndexLoop from "./defaultListIndex";
 
 class TodoItem {
   constructor(note, listName, date) {
@@ -28,7 +20,6 @@ function pushNoteToLocal(listName, note, date) {
   const test = new TodoItem(note, listName, date);
   const array = JSON.parse(localStorage.getItem(`${listName}`));
   array.push(test);
-  console.log(array);
   localStorage.setItem(`${listName}`, JSON.stringify(array));
   return test.id;
 }
@@ -87,6 +78,7 @@ function confirm(input, date) {
         // Change the background color of the flag button based on the updated flagged property
       }
     }
+    defaultListIndexLoop();
   });
 
   check.addEventListener("click", () => {
@@ -103,12 +95,11 @@ function confirm(input, date) {
         }
       }
     }
+    defaultListIndexLoop();
   });
 
-  console.log(id)
-
   deleteBtn.addEventListener("click", () => {
-    
+    // can't figure this out
     for (let i = 0; i < array.length; i += 1) {
       if (array[i].id === id) {
         todoList.removeChild(div);
@@ -122,7 +113,6 @@ function confirm(input, date) {
 }
 
 export default function createTodo() {
-  console.log("clicked");
   const todoList = document.querySelector(".todo-list");
   // todo-list > div
   const div = document.createElement("div");

@@ -8,5 +8,8 @@ export default function todoIndex(listName, isdefault) {
     const array = JSON.parse(localStorage.getItem(listName));
     const numberOfItem = document.querySelector(".todo-number-of-item");
     numberOfItem.textContent = `${array.length}`;
+
+    const chooseMeDiv = document.querySelector(`#${listName}`);
+    chooseMeDiv.textContent = `${array.length}`;
   }
 }

@@ -15,7 +15,6 @@ export default function flaggedPage() {
   addTodoBtn.classList.add("add-btn");
   todoList.classList.add("todo-list");
 
-
   todoContainer.append(addTodoBtn, name, todoList);
 
   // name > div*2
@@ -26,19 +25,28 @@ export default function flaggedPage() {
   numberOfItem.classList.add("todo-number-of-item");
 
   listName.textContent = "Flagged";
-  
+
   for (let i = 0; i < localStorage.length; i += 1) {
     const listNameAll = localStorage.key(i);
-    const array = JSON.parse(localStorage.getItem(listNameAll))
+    const array = JSON.parse(localStorage.getItem(listNameAll));
     for (let x = 0; x < array.length; x += 1) {
-        if(array[x].flagged) {
-            console.log("yes")
-            confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
-        }
+      if (array[x].flagged) {
+        confirm(
+          array[x].note,
+          array[x].scheduled,
+          array,
+          array[x].id,
+          listNameAll,
+          x,
+          "yes"
+        );
+      }
     }
-  } 
+  }
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
-  
+  numberOfItem.style.color = "rgb(253, 149, 30)";
+  listName.style.color = "rgb(253, 149, 30)";
+
   name.append(listName, numberOfItem);
 }

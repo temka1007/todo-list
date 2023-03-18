@@ -15,7 +15,6 @@ export default function completedPage() {
   addTodoBtn.classList.add("add-btn");
   todoList.classList.add("todo-list");
 
-
   todoContainer.append(addTodoBtn, name, todoList);
 
   // name > div*2
@@ -26,19 +25,28 @@ export default function completedPage() {
   numberOfItem.classList.add("todo-number-of-item");
 
   listName.textContent = "Completed";
-  
+
   for (let i = 0; i < localStorage.length; i += 1) {
     const listNameAll = localStorage.key(i);
-    const array = JSON.parse(localStorage.getItem(listNameAll))
+    const array = JSON.parse(localStorage.getItem(listNameAll));
     for (let x = 0; x < array.length; x += 1) {
-        if(array[x].completed) {
-            console.log("yes")
-            confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
-        }
+      if (array[x].completed) {
+        confirm(
+          array[x].note,
+          array[x].scheduled,
+          array,
+          array[x].id,
+          listNameAll,
+          x,
+          "yes"
+        );
+      }
     }
-  } 
+  }
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
-  
+  numberOfItem.style.color = "rgb(133, 133, 133)";
+  listName.style.color = "rgb(133, 133, 133)";
+
   name.append(listName, numberOfItem);
 }

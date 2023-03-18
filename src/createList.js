@@ -4,18 +4,20 @@ import "./style.css";
 import "date-fns";
 import todoPage from "./todoPage";
 import todoLoop from "./todoLoop";
+import defaultListIndexLoop from "./defaultListIndex";
 
 const content = document.querySelector(".todo-container");
 
 function cleaner() {
   while (content.firstChild) {
+    content.removeAttribute("id")
     content.removeChild(content.lastChild);
   }
 }
 
 function cantCreateSameNamedFolder() {
   content.setAttribute("id", "warning");
-  content.textContent = "warning";
+  content.textContent = "Warning! Can't create same named list.";
 }
 
 function sameNameChecker(input) {
@@ -61,6 +63,7 @@ export function confirm(input) {
     const deleteBtn = document.createElement("button");
 
     numberOfItem.classList.add("number-of-item");
+    numberOfItem.setAttribute("id", `${input.value}`)
 
     listName.textContent = `${input.value}`;
     numberOfItem.textContent = "0";
@@ -87,6 +90,7 @@ export function confirm(input) {
       list.removeChild(element);
       localStorage.removeItem(`${input.value}`);
       cleaner();
+      defaultListIndexLoop()
     });
   }
 }
