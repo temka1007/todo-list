@@ -4,7 +4,7 @@ import "./style.css";
 import "date-fns";
 import { confirm } from "./todoLoop";
 
-export default function allPage() {
+export default function scheduledPage() {
   const todoContainer = document.querySelector(".todo-container");
 
   // .todo-container > button div*2
@@ -25,18 +25,18 @@ export default function allPage() {
   listName.classList.add("todo-list-name");
   numberOfItem.classList.add("todo-number-of-item");
 
-  listName.textContent = "All";
+  listName.textContent = "Completed";
   
-  
-
   for (let i = 0; i < localStorage.length; i += 1) {
     const listNameAll = localStorage.key(i);
     const array = JSON.parse(localStorage.getItem(listNameAll))
     for (let x = 0; x < array.length; x += 1) {
-        confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
+        if(array[x].scheduled !== undefined) {
+            console.log("yes")
+            confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
+        }
     }
-
-  }
+  } 
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
   

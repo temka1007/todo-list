@@ -2,6 +2,7 @@ import "normalize.css";
 import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
+import todoIndex from "./todoIndex";
 
 // function cleaner() {
 //   while (content.firstChild) {
@@ -9,6 +10,8 @@ import "date-fns";
 //     content.removeChild(content.lastChild);
 //   }
 // }
+
+
 
 class TodoItem {
   constructor(note, listName, date) {
@@ -65,10 +68,11 @@ function confirm(input, date) {
 
   noteContainer.append(note, dateDiv, flagBtn, deleteBtn);
 
-  const listName = document.querySelector(".todo-list-name").innerText; 
-
+  const listName = document.querySelector(".todo-list-name").innerText;
+  const array = JSON.parse(localStorage.getItem(listName))
   const id = pushNoteToLocal(listName, input.value, date);
-  const array = JSON.parse(localStorage.getItem(listName));
+
+  todoIndex(listName)
 
   flagBtn.addEventListener("click", () => {
     const latestArray = JSON.parse(localStorage.getItem(listName));
@@ -76,9 +80,11 @@ function confirm(input, date) {
       if (latestArray[i].id === id) {
         latestArray[i].flagged = !latestArray[i].flagged; // Toggle the flagged property
         localStorage.setItem(listName, JSON.stringify(latestArray));
-        flagBtn.style.backgroundColor = latestArray[i].flagged ? "rgb(253, 149, 30)" : "";
+        flagBtn.style.backgroundColor = latestArray[i].flagged
+          ? "rgb(253, 149, 30)"
+          : "";
         flagBtn.textContent = latestArray[i].flagged ? "flagged" : "flag";
-         // Change the background color of the flag button based on the updated flagged property
+        // Change the background color of the flag button based on the updated flagged property
       }
     }
   });
@@ -91,7 +97,6 @@ function confirm(input, date) {
         localStorage.setItem(listName, JSON.stringify(latestArray));
         const checked = document.createElement("div");
         if (latestArray[i].completed) {
-          console.log("true");
           check.appendChild(checked);
         } else {
           check.removeChild(check.firstChild);
@@ -100,15 +105,19 @@ function confirm(input, date) {
     }
   });
 
+  console.log(id)
+
   deleteBtn.addEventListener("click", () => {
+    
     for (let i = 0; i < array.length; i += 1) {
       if (array[i].id === id) {
         todoList.removeChild(div);
         const latestArray = JSON.parse(localStorage.getItem(listName));
         const newArray = latestArray.filter((object) => object.id !== id);
         localStorage.setItem(listName, JSON.stringify(newArray));
+        todoIndex(listName)
       }
-    }
+    } 
   });
 }
 
@@ -157,10 +166,8 @@ export default function createTodo() {
       todoList.removeChild(todoList.lastChild);
       confirm(input, dateInputValue);
 
-      const addTodoBtn = document.querySelector('.add-btn');
+      const addTodoBtn = document.querySelector(".add-btn");
       addTodoBtn.disabled = false;
-
-      
 
       // eslint-disable-next-line no-restricted-globals
       event.preventDefault();
@@ -168,6 +175,8 @@ export default function createTodo() {
   });
 
   cancelBtn.addEventListener("click", () => {
+    const addTodoBtn = document.querySelector(".add-btn");
+    addTodoBtn.disabled = false;
     todoList.removeChild(todoList.lastChild);
   });
 }

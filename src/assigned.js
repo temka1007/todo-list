@@ -2,9 +2,8 @@ import "normalize.css";
 import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
-import { confirm } from "./todoLoop";
 
-export default function allPage() {
+export default function assignedPage() {
   const todoContainer = document.querySelector(".todo-container");
 
   // .todo-container > button div*2
@@ -25,18 +24,7 @@ export default function allPage() {
   listName.classList.add("todo-list-name");
   numberOfItem.classList.add("todo-number-of-item");
 
-  listName.textContent = "All";
-  
-  
-
-  for (let i = 0; i < localStorage.length; i += 1) {
-    const listNameAll = localStorage.key(i);
-    const array = JSON.parse(localStorage.getItem(listNameAll))
-    for (let x = 0; x < array.length; x += 1) {
-        confirm(array[x].note, array[x].scheduled, array, array[x].id, listNameAll, x, "yes")
-    }
-
-  }
+  listName.textContent = "Assigned";
 
   numberOfItem.textContent = `${todoList.childElementCount}`;
   

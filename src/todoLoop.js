@@ -2,8 +2,10 @@ import "normalize.css";
 import "./style.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "date-fns";
+import todoIndex from "./todoIndex";
 
-export function confirm(input, date, array, todoID, listName, i) {
+export function confirm(input, date, array, todoID, listName, i, isDefault) {
+
   // todo-list > div
   const todoList = document.querySelector(".todo-list");
   const div = document.createElement("div");
@@ -56,6 +58,10 @@ export function confirm(input, date, array, todoID, listName, i) {
   noteContainer.append(note, dateDiv, flagBtn, deleteBtn);
 
   const latestArray = JSON.parse(localStorage.getItem(listName));
+
+  todoIndex(listName, isDefault)
+  console.log(isDefault)
+
   flagBtn.style.backgroundColor = latestArray[i].flagged
     ? "rgb(253, 149, 30)"
     : "";
@@ -93,9 +99,12 @@ export function confirm(input, date, array, todoID, listName, i) {
         const latestArray = JSON.parse(localStorage.getItem(listName));
         const newArray = latestArray.filter((object) => object.id !== todoID);
         localStorage.setItem(listName, JSON.stringify(newArray));
+        todoIndex(listName, isDefault)
       }
     }
   });
+
+  
 }
 
 export default function todoLoop(listName) {

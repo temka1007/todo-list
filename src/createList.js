@@ -136,6 +136,8 @@ export default function listInput() {
   });
 
   cancelBtn.addEventListener("click", () => {
+    const addListBtn = document.querySelector(".list-add");
+    addListBtn.disabled = false;
     // eslint-disable-next-line no-restricted-globals
     event.preventDefault();
     list.removeChild(list.lastChild);

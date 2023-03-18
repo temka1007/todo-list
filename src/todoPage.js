@@ -29,7 +29,9 @@ export default function todoPage(pageName) {
   numberOfItem.classList.add("todo-number-of-item");
 
   listName.textContent = `${pageName}`;
-  numberOfItem.textContent = "0";
+
+  const array = JSON.parse(localStorage.getItem(pageName));
+  numberOfItem.textContent = `${array.length}`;
 
   name.append(listName, numberOfItem);
 
